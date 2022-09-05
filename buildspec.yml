@@ -1,0 +1,43 @@
+version: 0.2
+
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - echo Entered the install phase...
+      - apt-get update -y
+      - apt-get install -y maven
+      - cd src
+    finally:
+      - echo This always runs regardless of the update or install command result 
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+    
+    finally:
+      - echo This always runs even if the login command fails 
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build started on `date`
+      - mvn clean install
+    finally:
+      - echo This always runs regardless of the install command status
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
+  
+artifacts:
+  files:
+    - appspec.yml
+    - scripts/*
+    - src/target/*
+    - src/web/app/target/*
+  name: geostore-artifact
+  discard-paths: yes
+cache:
+  paths:
+    - '/root/.m2/**/*'
