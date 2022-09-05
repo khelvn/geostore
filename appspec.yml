@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /opt/tomcat/webapps
+
+hooks:
+    ApplicationStop:
+    - location: scripts/stop.sh
+      timeout: 300
+      runas: root
+    ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: root
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
