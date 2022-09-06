@@ -8,11 +8,11 @@ files:
 
 hooks:
     ApplicationStop:
-    - location: scripts/shutdown.sh
+    - location: /scripts/shutdown.sh
       timeout: 300
       runas: root
     ApplicationStart:
-    - location: scripts/startup.sh
+    - location: /scripts/startup.sh
       timeout: 300
       runas: root
 
