@@ -4,17 +4,7 @@ os: linux
 files:
   - source: /
     destination: /opt/tomcat/webapps
-
-hooks:
-    ApplicationStop:
-    - location: scripts/shutdown.sh
-      timeout: 300
-      runas: root
-    ApplicationStart:
-    - location: scripts/start.sh
-      timeout: 300
-      runas: root
-
+    
 permissions:
   - object: /
     pattern: "**"
